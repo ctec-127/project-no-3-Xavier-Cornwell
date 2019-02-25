@@ -91,7 +91,7 @@ The database table contains new columns:
 
 - **id** - This is a field that auto assigns a number every time a new record is inserted. You never need to code anything for this column.
 - **gpa** - This field will be used to store a student's **GPA**.
-- **financial_aid** - This field will be used to store either a 0 or 1. 0 means that they don't have financial aid and 1 means that they do.
+- **financial_aid** - This field will be used to s\tore either a 0 or 1. 0 means that they don't have financial aid and 1 means that they do.
 - **degree_program** - This will contain the name of the degree program that they are currently enrolled in.
 - **date_created** - This column is a timestamp and is automatically created by the database when a new record is inserted.
 

@@ -21,6 +21,24 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <label class="col-form-label" for="phone">Phone </label>
     <input class="form-control" type="text" id="phone" name="phone" value="<?php echo (isset($phone) ? $phone: '');?>"">
     <br>
-    <a href="display-records.php">Cancel</a>&nbsp;&nbsp;
+    <label class="col-form-label" for="gpa">GPA</label>
+    <input class="form-control" type="number" min="0" max="4" id="gpa" name="gpa" value="<?php echo (isset($gpa) ? $gpa: '');?>"">
+    <br>
+    <label class="col-form-label" for="financial_aid">Financial Aid</label><br>
+    <input type="radio" name="financial_aid" value="1"> yes<br>
+    <input type="radio" name="financial_aid" value="0"> no<br>
+    <br>
+    <label class="col-form-label" for="degree">Degree</label>
+    <select name="degree">
+    <option value="undecided">undecided</option>
+    <option value="cs">CS</option>
+    <option value="bio">Bio</option>
+    <option value="chem">Chem</option>
+    <option value="law">law</option>
+    <option value="english">English</option>
+    </select> 
+<br>
+<br>
+    <a href="display-records.php">Cancel</a>&nbsp;&nbsp;    
     <button class="btn btn-primary" type="submit">Save Record</button>
 </form>
