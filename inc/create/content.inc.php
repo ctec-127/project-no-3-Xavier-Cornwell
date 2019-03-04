@@ -102,5 +102,25 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
 
 }
+		// code for sticky select and radio $value = '(option value)' $selectName='(select)' 
+
+		// StickySelect('value','select');
+function StickySelect($value, $selectName){
+
+    if (isset($_POST["$selectName"])){
+
+        $checker = $_POST["$selectName"];
+
+        if ($checker == $value){
+
+        echo "selected";
+
+        }
+
+    }
+
+}
+
+
 
 ?>

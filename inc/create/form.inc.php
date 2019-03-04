@@ -25,17 +25,17 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <input class="form-control" type="number" min="0" max="4" id="gpa" name="gpa" value="<?php echo (isset($gpa) ? $gpa: '');?>"">
     <br>
     <label class="col-form-label" for="financial_aid">Financial Aid</label><br>
-    <input type="radio" name="financial_aid" value="1"> yes<br>
-    <input type="radio" name="financial_aid" value="0"> no<br>
+    <input type="radio" name="financial_aid" value="1" <?php StickySelect('1', 'financial_aid');?>> yes<br>
+    <input type="radio" name="financial_aid" value="0" <?php StickySelect('1', 'financial_aid');?>> no<br>
     <br>
     <label class="col-form-label" for="degree">Degree</label>
     <select name="degree">
-    <option value="undecided">undecided</option>
-    <option value="cs">CS</option>
-    <option value="bio">Bio</option>
-    <option value="chem">Chem</option>
-    <option value="law">law</option>
-    <option value="english">English</option>
+    <option value="undecided" <?php StickySelect('undecided', 'degree');?>>undecided</option>
+    <option value="cs" <?php StickySelect('cs', 'degree');?>>CS</option>
+    <option value="bio" <?php StickySelect('bio', 'degree');?>>Bio</option>
+    <option value="chem" <?php StickySelect('chem', 'degree');?>>Chem</option>
+    <option value="law" <?php StickySelect('law', 'degree');?>>law</option>
+    <option value="english" <?php StickySelect('english', 'degree');?>>English</option>
     </select> 
 <br>
 <br>
