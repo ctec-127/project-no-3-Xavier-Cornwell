@@ -25,11 +25,13 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
     <input class="form-control" type="number" min="0" max="4" id="gpa" name="gpa" value="<?php echo (isset($gpa) ? $gpa: '');?>"">
     <br>
     <label class="col-form-label" for="financial_aid">Financial Aid</label><br>
-    <input type="radio" name="financial_aid" value="1" <?php StickySelect('1', 'financial_aid');?>> yes<br>
-    <input type="radio" name="financial_aid" value="0" <?php StickySelect('1', 'financial_aid');?>> no<br>
+    <label class="col-form-label">
+    <input type="radio" name="financial_aid" value="1" <?php StickySelect('1', 'financial_aid');?>> yes </label><br>
+    <label class="col-form-label">
+    <input type="radio" name="financial_aid" value="0" <?php StickySelect('1', 'financial_aid');?>> no </label><br>
     <br>
-    <label class="col-form-label" for="degree">Degree</label>
-    <select name="degree">
+    <label class="col-form-label" for="degree">Degree</label><br>
+    <select name="degree" class="form-control">
     <option value="undecided" <?php StickySelect('undecided', 'degree');?>>undecided</option>
     <option value="cs" <?php StickySelect('cs', 'degree');?>>CS</option>
     <option value="bio" <?php StickySelect('bio', 'degree');?>>Bio</option>
