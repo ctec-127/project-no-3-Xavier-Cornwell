@@ -8,6 +8,10 @@ $error_bucket = [];
 // http://php.net/manual/en/mysqli.real-escape-string.php
 
 if($_SERVER['REQUEST_METHOD']=="POST"){
+    // grab primary key from hidden field
+    if (!empty($_POST['id'])) {
+        $id = $_POST['id'];
+    }
     // First insure that all required fields are filled in
     if (empty($_POST['first'])) {
         array_push($error_bucket,"<p>A first name is required.</p>");
@@ -31,40 +35,34 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     }
     if (empty($_POST['phone'])) {
         array_push($error_bucket,"<p>A phone number is required.</p>");
-    }
-    else {
-        $phone = $db->real_escape_string($_POST['phone']);
-    }
-      //checking if the field is empty for the error bucket
-      if (empty($_POST['gpa'])) {
-        array_push($error_bucket,"<p>A gpa number is required.</p>");
     } else {
-        $gpa = $db->real_escape_string($_POST['gpa']);
+        $phone = $db->real_escape_string(strip_tags($_POST['phone']));
     }
-    //checking if the field is empty for the error bucket
-    if (empty($_POST['financial_aid'])) {
-        array_push($error_bucket,"<p>A financial aid info is required.</p>");}
+          //checking if the field is empty for the error bucket
+          if (empty($_POST['gpa'])) {
+            array_push($error_bucket,"<p>A gpa number is required.</p>");
+        } else {
+            $gpa = $db->real_escape_string(strip_tags($_POST['gpa']));
+        }
+        //checking if the field is empty for the error bucket
+        if (empty($_POST['financial_aid'])) {
+            array_push($error_bucket,"<p>A financial aid info is required.</p>");}
+        
     
-
-   //checking if degree is set and setting what ever the value is to the variable
-   if(isset($_POST['degree'])){
-    $degree = $_POST['degree'];
-} 
-//checking if finicial aid is set and setting the value to the variable for the query
-if(isset($_POST['financial_aid'])){
-    $financial_aid = $_POST['financial_aid'];
-} 
-
-
+       //checking if degree is set and setting what ever the value is to the variable
+       if(isset($_POST['degree'])){
+        $degree = $_POST['degree'];
+    } 
+    //checking if finicial aid is set and setting the value to the variable for the query
+    if(isset($_POST['financial_aid'])){
+        $financial_aid = $_POST['financial_aid'];
+    } 
+    
 
     // If we have no errors than we can try and insert the data
     if (count($error_bucket) == 0) {
         // Time for some SQL
-        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,email,phone,gpa,financial_aid,degree_program) ";
-        $sql .= "VALUES ('$first','$last',$sid,'$email','$phone','$gpa','$financial_aid','$degree')";
-
-        // comment in for debug of SQL
-        // echo $sql;
+        $sql = "UPDATE $db_table SET first_name='$first', last_name='$last', student_id=$sid, email='$email',phone='$phone', gpa='$gpa', financial_aid='$financial_aid', degree_program='$degree' WHERE id=$id";
 
         $result = $db->query($sql);
         if (!$result) {
@@ -87,7 +85,27 @@ if(isset($_POST['financial_aid'])){
         }
     } else {
         display_error_bucket($error_bucket);
-    }
-}
+    } // end of error bucket
+} else {
+    // check for record id (primary key)
+    $id = $_GET['id'];
+    // now we need to query the database and get the data for the record
+    // note limit 1
+    $sql = "SELECT * FROM $db_table WHERE id=$id LIMIT 1";
+    // query database
+    $result = $db->query($sql);
+    // get the one row of data
+    while($row = $result->fetch_assoc()) {
+        $first = $row['first_name'];
+        $last = $row['last_name'];
+        $sid = $row['student_id'];
+        $email = $row['email'];
+        $phone = $row['phone'];
 
-?>
+        //added gpa finanical_aid and degree to the program
+        $gpa = $row['gpa'];
+        $financial_aid = $row['financial_aid'];
+        $degree = $row['degree'];
+    }
+
+}
