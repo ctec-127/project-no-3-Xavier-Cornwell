@@ -105,7 +105,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         //added gpa finanical_aid and degree to the program
         $gpa = $row['gpa'];
         $financial_aid = $row['financial_aid'];
-        $degree = $row['degree'];
+        $degree = $row['degree_program'];
     }
 
 }
