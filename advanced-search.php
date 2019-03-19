@@ -70,4 +70,3 @@ require_once 'inc/layout/header.inc.php';
 
 
 <?php require_once 'inc/layout/footer2.inc.php'; ?>
-
