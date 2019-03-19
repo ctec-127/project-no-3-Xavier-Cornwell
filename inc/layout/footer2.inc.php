@@ -11,17 +11,18 @@
 <script src="js/jquery-3.3.1.min.js"></script>
 <!-- Bootstrap JavaScript -->
 <script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript"  src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
 <script>
 //configuring the datatable function
 $(document).ready( function () {
     $('#table').DataTable({
         "lengthMenu":[ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-        "ordering": false,
         "pageLength": 25
-     
     });
 } );
 </script>
+<!-- end div for the master container -->
+</div>
 </body>
 </html>

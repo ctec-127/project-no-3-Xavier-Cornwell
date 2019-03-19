@@ -57,12 +57,17 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     if(isset($_POST['financial_aid'])){
         $financial_aid = $_POST['financial_aid'];
     } 
-    
+
+    if (empty($_POST['graduation_date'])) {
+        array_push($error_bucket,"<p>A graduation date is required.</p>");
+    } else {
+        $graduation = $db->real_escape_string(strip_tags($_POST['graduation_date']));
+    }
 
     // If we have no errors than we can try and insert the data
     if (count($error_bucket) == 0) {
         // Time for some SQL
-        $sql = "UPDATE $db_table SET first_name='$first', last_name='$last', student_id=$sid, email='$email',phone='$phone', gpa='$gpa', financial_aid='$financial_aid', degree_program='$degree' WHERE id=$id";
+        $sql = "UPDATE $db_table SET first_name='$first', last_name='$last', student_id=$sid, email='$email',phone='$phone', gpa='$gpa', financial_aid='$financial_aid', degree_program='$degree', graduation_date='$graduation' WHERE id=$id";
 
         $result = $db->query($sql);
         if (!$result) {
@@ -79,9 +84,11 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             unset($email);
             unset($phone);
             unset($gpa);
+            //unsetting to make sure it is clear incase they want to make another update
             unset($financial_aid);
             unset($degree);
             unset($id);
+            unset($graduation);
         }
     } else {
         display_error_bucket($error_bucket);
@@ -105,7 +112,8 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
         //added gpa finanical_aid and degree to the program
         $gpa = $row['gpa'];
         $financial_aid = $row['financial_aid'];
-        $degree = $row['degree'];
+        $degree = $row['degree_program'];
+        $graduation = $row['graduation_date'];
     }
 
 }

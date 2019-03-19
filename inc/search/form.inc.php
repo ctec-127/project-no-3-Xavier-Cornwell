@@ -1,5 +1,6 @@
 <?php // Filename: form.inc.php 
 
+//sticky select function that gets the value and the place its from and if it is checked selected is set by that value
 function StickySelect($value, $selectName){
 
     if (isset($_POST["$selectName"])){
@@ -16,6 +17,23 @@ function StickySelect($value, $selectName){
 
 }
 
+//fucntion that gets the post of the name and then playses an checked for the radio button
+function StickyRadio($value, $selectName){
+
+    if (isset($_POST["$selectName"])){
+
+        $checker = $_POST["$selectName"];
+
+        if ($checker == $value){
+
+        echo "checked";
+
+        }
+
+    }
+
+}
+
 ?>
 
 <!-- Note the use of sticky fields below -->
@@ -23,7 +41,7 @@ function StickySelect($value, $selectName){
 Scroll down the page
 http://php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary
 -->
-<form class='text-left border border-light p-5' action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+<form class = "text-left border border-light p-5" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
     <label class="col-form-label" for="first">First Name </label>
     <input class="form-control" type="text" id="first" name="first" value="<?php echo (isset($first) ? $first : '');?>">
     <br>
@@ -45,17 +63,20 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
    
    
    
-    <label class="col-form-label" for="financial_aid">Financial Aid</label><br>
+    <label class="col-form-label" for="radio1">Financial Aid</label><br>
     <label class="col-form-label">
-    <input type="radio" name="financial_aid" id="financial_aid" value="1" <?php if (isset($_POST['financial_aid']) && $_POST['financial_aid'] == "1") echo 'checked';?>> yes </label><br>
+    <input type="radio" name="financial_aid"  value="1" id='radio1'  > yes </label><br>
     <label class="col-form-label">
-    <input type="radio" name="financial_aid" value="0" <?php if (isset($_POST['financial_aid']) && $_POST['financial_aid'] == "0") echo 'checked';?>> no </label><br>
+    <input type="radio" name="financial_aid"  value="no" id='radio2' > no </label><br>
     <br>
+    
+    
+    
     <label class="col-form-label" for="degree">Degree</label><br>
 
 
-
     <select name="degree" id="degree" class="form-control">
+        <option value="" <?php StickySelect('', 'degree');?>>none</option>
         <option value="undecided" <?php StickySelect('undecided', 'degree');?>>undecided</option>
         <option value="cs" <?php StickySelect('cs', 'degree');?>>CS</option>
         <option value="bio" <?php StickySelect('bio', 'degree');?>>Bio</option>
@@ -63,11 +84,11 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
         <option value="law" <?php StickySelect('law', 'degree');?>>law</option>
         <option value="english" <?php StickySelect('english', 'degree');?>>English</option>
     </select> <br>
-    <label class="col-form-label" for="graduation_date">Graduation Date:</label><br>
-    <input type="date" id="graduation_date" name="graduation_date" class="form-control" value="<?php echo (isset($graduation) ? $graduation: '');?>">
+    <label class="col-form-label" " for="graduation_date">Graduation Date:</label><br>
+    <input id="graduation_date" type="date" name="graduation_date" class="form-control" value="<?php echo (isset($graduation) ? $graduation: '');?>">
     <br>
-    <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Save Record</button>
+    <button  class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Search</button>
+    <button class="btn btn-outline-secondary btn-rounded btn-block z-depth-0 my-4 waves-effect" type="reset">Reset</button>
 
-    <a class="btn btn-outline-danger btn-rounded btn-block z-depth-0 my-4 waves-effect" href="display-records.php">Cancel</a>&nbsp;&nbsp;
     <input type="hidden" name="id" value="<?php echo (isset($id) ? $id : '');?>">
 </form>
