@@ -29,10 +29,10 @@ function display_letter_filters($filter){
 
 function display_record_table($result){
     echo '<div class="table-responsive">';
-    echo "<table class=\"table table-striped table-hover table-sm mt-3 table-bordered\">";
+    echo "<table id='table' class=\"table table-striped table-hover table-sm mt-3 table-bordered\">";
     //added sortby gpa financial aid and degree via link by a url query. the a link calles the sort by for sql and creates a slot on the table of the database
     echo '<thead class="thead-dark"><tr><th class="bg-primary">Actions</th><th><a href="?sortby=student_id">Student ID</a></th><th><a href="?sortby=first_name">First Name</a></th><th><a href="?sortby=last_name">Last Name</a></th><th><a href="?sortby=email">Email</a></th><th><a href="?sortby=phone">Phone</a></th><th><a href="?sortby=degree_program">Degree</a></th><th>
-    <a href="?sortby=financial_aid">Financial Aid</a></th><th><a href="?sortby=gpa">GPA</a></th></tr></thead>';
+    <a href="?sortby=financial_aid">Financial Aid</a></th><th><a href="?sortby=gpa">GPA</a></th><th><a href="?sortby=graduation_date">Graduation Date</a></th></tr></thead>';
     # $row will be an associative array containing one row of data at a time
     while ($row = $result->fetch_assoc()){
         # display rows and columns of data
@@ -48,6 +48,7 @@ function display_record_table($result){
         echo "<td>{$row['degree_program']}</td>";
         echo "<td>{$row['financial_aid']}</td>";
         echo "<td>{$row['gpa']}</td>";
+        echo "<td>{$row['graduation_date']}</td>";
         echo '</tr>';
     } // end while
     // closing table tag and div

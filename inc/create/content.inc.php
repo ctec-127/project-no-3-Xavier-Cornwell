@@ -54,14 +54,18 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 if(isset($_POST['financial_aid'])){
     $financial_aid = $_POST['financial_aid'];
 } 
-
+if (empty($_POST['graduation_date'])) {
+    array_push($error_bucket,"<p>A graduation date is required.</p>");
+} else {
+    $graduation = $db->real_escape_string(strip_tags($_POST['graduation_date']));
+}
 
 
     // If we have no errors than we can try and insert the data
     if (count($error_bucket) == 0) {
         // Time for some SQL
-        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,email,phone,gpa,financial_aid,degree_program) ";
-        $sql .= "VALUES ('$first','$last',$sid,'$email','$phone','$gpa','$financial_aid','$degree')";
+        $sql = "INSERT INTO $db_table (first_name,last_name,student_id,email,phone,gpa,financial_aid,degree_program,graduation_date) ";
+        $sql .= "VALUES ('$first','$last',$sid,'$email','$phone','$gpa','$financial_aid','$degree', $graduation)";
 
         // comment in for debug of SQL
         // echo $sql;
@@ -81,9 +85,11 @@ if(isset($_POST['financial_aid'])){
             unset($email);
             unset($phone);
             unset($gpa);
+            //unsetting to make so user is able to create multiple new students
             unset($financial_aid);
             unset($degree);
             unset($id);
+            unset($graduation);
         }
     } else {
         display_error_bucket($error_bucket);
