@@ -84,7 +84,7 @@ http://php.net/manual/en/language.operators.comparison.php#language.operators.co
         <option value="law" <?php StickySelect('law', 'degree');?>>law</option>
         <option value="english" <?php StickySelect('english', 'degree');?>>English</option>
     </select> <br>
-    <label class="col-form-label" " for="graduation_date">Graduation Date:</label><br>
+    <label class="col-form-label"  for="graduation_date">Graduation Date:</label><br>
     <input id="graduation_date" type="date" name="graduation_date" class="form-control" value="<?php echo (isset($graduation) ? $graduation: '');?>">
     <br>
     <button  class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Search</button>
